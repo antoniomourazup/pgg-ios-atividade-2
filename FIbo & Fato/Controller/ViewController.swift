@@ -23,15 +23,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func readTextFromTextFieldAndVerifyIsValid() -> Bool {
-        let textReceivedFromTextField: String! = numberTextField.text
-        if textReceivedFromTextField.isEmpty {
-            return false
-        } else {
-            return true
-        }
-    }
-    
     @IBAction func calculaFatorialWhenButtonIsTouchUpInside() {
         if(readTextFromTextFieldAndVerifyIsValid()) {
             let numberFatorial = CalculaFibonacciEFatorial.calculaFatorial(numberToFatorial: Int(numberTextField.text ?? "") ?? 0)
@@ -39,6 +30,11 @@ class ViewController: UIViewController {
         } else {
             showAlertError()
         }
+    }
+    
+    func readTextFromTextFieldAndVerifyIsValid() -> Bool {
+        let textReceivedFromTextField: String! = numberTextField.text
+        return !textReceivedFromTextField.isEmpty && textReceivedFromTextField.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }
     
     private func showInTextView(resultFibonacciOrFatorial: Int, messageInTextView: String) {
